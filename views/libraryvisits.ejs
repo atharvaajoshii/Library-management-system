@@ -4,12 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Books</title>
+    <title>Student Record</title>
     <link rel="stylesheet" href="/style.css">
 </head>
 
 <body>
-        <div class="sidebar">
+    <div class="sidebar">
         <h2>LIBRARY</h2>
         <a href="/dashboard">Dashboard</a>
         <a href="/books">books</a>
@@ -19,39 +19,41 @@
         <a href="/logout">logout</a>
     </div>
     <div class="main-page">
-        <h1>Books Management</h1>
-        <a href="/books/add">add new book</a>
+        <h1>Library Visits</h1>
 
         <table>
             <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Author</th>
-                <th>Quantity</th>
-                <th>Actions</th>
-                <th>Issue</th>
+                <th>usn</th>
+                <th>name</th>
+                <th>branch</th>
+                <th>entry_time</th>
+                <th>exit_time</th>
+                <th>duration</th>
+                <th>status</th>
             </tr>
 
-            <% books.forEach(book=> { %>
+            <% visitors.forEach(visit=> { %>
                 <tr>
                     <td>
-                        <%= book.id %>
+                        <%= visit.usn %>
                     </td>
                     <td>
-                        <%= book.title %>
+                        <%= visit.name %>
                     </td>
                     <td>
-                        <%= book.author %>
+                        <%= visit.branch %>
                     </td>
                     <td>
-                        <%= book.quantity %>
+                        <%= visit.entry_time %>
                     </td>
                     <td>
-                        <a href="/books/edit/<%= book.id %>">edit</a>
-                        <a href="/books/delete/<%= book.id %>">delete</a>
+                        <%= visit.exit_time %>
                     </td>
                     <td>
-                        <a href="/books/issue/<%= book.id %>">issue</a>
+                        <%= visit.duration %>
+                    </td>
+                    <td>
+                        <%= visit.status %>
                     </td>
                 </tr>
                 <% }) %>

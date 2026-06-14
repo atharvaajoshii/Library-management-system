@@ -342,6 +342,19 @@ app.post('/students/add', isLoggedIn, (req, res) => {
         }
     );
 });
+
+
+app.get('/visits',(req,res)=>{
+    db.all(`select s.usn,s.name,s.branch,l.entry_time,l.exit_time,l.duration,l.status
+            from LIBRARYVISITS l,STUDENTS s 
+            where s.usn=l.usn`,(err,rows)=>{
+                if(err){console.log(err)}
+                res.render("libraryvisits",{visitors:rows})
+            })
+})
+
+
+
 const PORT = process.env.PORT || 5002;
 
 app.listen(PORT, () => {
