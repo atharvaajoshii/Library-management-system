@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body id="body">
+    <div class="login-container">
+        <div class="login-box">
+            <h1>STUDENT LOGIN</h1>
+            <a href="/">
+                <h2>Login as a Librarian</h2>
+            </a>
+            <% if(error){ %>
+                <p class="error">
+                    <%= error %>
+                </p>
+                <% } %>
+                    <form action="/studentlogin" method="post">
+                        <input type="text" name="usn" placeholder="Enter USN">
+                        <button type="submit">Login</button>
+                    </form>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+    <div class="sidebar">
+        <h2>LIBRARY</h2>
+        <a href="/dashboard">Dashboard</a>
+        <a href="/books">books</a>
+        <a href="/borrowedbooks">borrowed books</a>
+        <a href="/students">students record</a>
+        <a href="/logout">logout</a>
+    </div>
+    <div class="main-page">
+        <h1>Borrowed Books</h1>
+        <table>
+            <tr>
+                <th>Id</th>
+                <th>Usn</th>
+                <th>Book Id</th>
+                <th>Borrow Date</th>
+                <th>Return Date</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+
+            <% books.forEach(book=> { %>
+                <tr>
+                    <td>
+                        <%= book.id %>
+                    </td>
+                    <td>
+                        <%= book.usn %>
+                    </td>
+                    <td>
+                        <%= book.bookid %>
+                    </td>
+                    <td>
+                        <%= book.borrow_date %>
+                    </td>
+                    <td>
+                        <%= book.return_date %>
+                    </td>
+                    <td>
+                        <%= book.status %>
+                    </td>
+                    <td>
+                        <% if(book.status==='Borrowed' ){ %>
+                            <a href="/borrowedbooks/returned/<%= book.usn %>/<%= book.bookid %>">Mark returned</a>
+                            <% } else { %>
+                                Returned
+                                <% } %>
+                    </td>
+                </tr>
+                <% }) %>
+        </table>
+    </div>
+</body>
+
+</html>

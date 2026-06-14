@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Issue book</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+    <div class="form-box">
+        <h1>Issue Book</h1>
+        <form action="" method="post">
+            <input type="text" name="usn" placeholder="Enter usn" required>
+            <% if(error){ %>
+                <p class="error">
+                    <%= error %>
+                </p>
+                <% } %>
+                    <button type="submit">edit</button>
+        </form>
+    </div>
+</body>
+
+</html>

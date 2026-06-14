@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+        <div class="sidebar">
+        <h2>LIBRARY</h2>
+        <a href="/dashboard">Dashboard</a>
+        <a href="/books">books</a>
+        <a href="/borrowedbooks">borrowed books</a>
+        <a href="/students">students record</a>
+        <a href="/logout">logout</a>
+    </div>
+    <div class="main-page">
+        <h1>Books Management</h1>
+        <a href="/books/add">add new book</a>
+
+        <table>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Quantity</th>
+                <th>Actions</th>
+                <th>Issue</th>
+            </tr>
+
+            <% books.forEach(book=> { %>
+                <tr>
+                    <td>
+                        <%= book.id %>
+                    </td>
+                    <td>
+                        <%= book.title %>
+                    </td>
+                    <td>
+                        <%= book.author %>
+                    </td>
+                    <td>
+                        <%= book.quantity %>
+                    </td>
+                    <td>
+                        <a href="/books/edit/<%= book.id %>">edit</a>
+                        <a href="/books/delete/<%= book.id %>">delete</a>
+                    </td>
+                    <td>
+                        <a href="/books/issue/<%= book.id %>">issue</a>
+                    </td>
+                </tr>
+                <% }) %>
+        </table>
+    </div>
+</body>
+
+</html>

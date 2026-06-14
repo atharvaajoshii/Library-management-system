@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Record</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+        <div class="sidebar">
+        <h2>LIBRARY</h2>
+        <a href="/dashboard">Dashboard</a>
+        <a href="/books">books</a>
+        <a href="/borrowedbooks">borrowed books</a>
+        <a href="/students">students record</a>
+        <a href="/logout">logout</a>
+    </div>
+    <div class="main-page">
+        <h1>Books Management</h1>
+        <a href="/books/add">add new book</a>
+
+        <table>
+            <tr>
+                <th>usn</th>
+                <th>name</th>
+                <th>branch</th>
+                <th>Actions</th>
+            </tr>
+
+            <% students.forEach(student=> { %>
+                <tr>
+                    <td>
+                        <%= student.usn %>
+                    </td>
+                    <td>
+                        <%= student.name %>
+                    </td>
+                    <td>
+                        <%= student.branch %>
+                    </td>
+                    <td>
+                        <a href="/student/delete/<%= student.usn %>">delete</a>
+                    </td>
+                </tr>
+                <% }) %>
+        </table>
+    </div>
+</body>
+
+</html>
