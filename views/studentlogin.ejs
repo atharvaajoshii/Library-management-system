@@ -4,14 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Student Login</title>
     <link rel="stylesheet" href="/style.css">
 </head>
-
 <body id="body">
     <div class="login-container">
         <div class="login-box">
-            <h1>STUDENT LOGIN</h1>
+            <h1>LIBRARY MANAGEMENT SYSTEM</h1>
             <a href="/">
                 <h2>Login as a Librarian</h2>
             </a>
@@ -19,13 +18,41 @@
                 <p class="error">
                     <%= error %>
                 </p>
-                <% } %>
-                    <form action="/studentlogin" method="post">
-                        <input type="text" name="usn" placeholder="Enter USN">
-                        <button type="submit">Login</button>
-                    </form>
+            <% } %>
+            <form action="/studentlogin" method="post">
+                <input type="text" name="usn" placeholder="Enter USN" required>
+                <button type="submit">
+                    Login
+                </button>
+            </form>
+            <% if(visit){ %>
+                <div class="visit-card">
+                    <% if(visit.status === 'IN'){ %>
+                        <h3>Successfully logged IN!</h3>
+                        <p>
+                            <strong>Entry Time :</strong>
+                            <%= visit.entry_time %>
+                        </p>
+                    <% } else { %>
+                        <h3>Successfully logged OUT!</h3>
+                        <p>
+                            <strong>Entry Time :</strong>
+                            <%= visit.entry_time %>
+                        </p>
+                        <p>
+                            <strong>Exit Time :</strong>
+                            <%= visit.exit_time %>
+                        </p>
+                        <p>
+                            <strong>Duration :</strong>
+                            <%= visit.duration %>
+                        </p>
+                    <% } %>
+                </div>
+            <% } %>
         </div>
     </div>
+
 </body>
 
 </html>

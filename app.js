@@ -71,7 +71,7 @@ app.get('/logout', (req, res) => {
     )
 })
 
-app.get('/books/add',isLoggedIn, (req, res) => {
+app.get('/books/add', isLoggedIn, (req, res) => {
     res.render("addbook")
 })
 
@@ -105,7 +105,7 @@ app.get('/books/delete/:id', isLoggedIn, (req, res) => {
     })
 })
 
-app.get('/books/edit/:id',isLoggedIn, (req, res) => {
+app.get('/books/edit/:id', isLoggedIn, (req, res) => {
     db.get(`select * from books where id=?`, [req.params.id], (err, row) => {
         res.render("editbook", { book: row })
     })
@@ -123,20 +123,20 @@ app.post('/books/edit/:id', (req, res) => {
 })
 
 
-app.get('/borrowedbooks',isLoggedIn, (req, res) => {
+app.get('/borrowedbooks', isLoggedIn, (req, res) => {
     db.all(`select * from BORROWEDBOOKS`, (err, rows) => {
         res.render("borrowedbooks", { books: rows })
     })
 })
 
-app.get('/students',isLoggedIn, (req, res) => {
+app.get('/students', isLoggedIn, (req, res) => {
     db.all(`select * from students order by usn`, (err, rows) => {
         res.render("studentrecord", { students: rows })
     })
 })
 
 
-app.get('/student/delete/:usn', isLoggedIn,(req, res) => {
+app.get('/student/delete/:usn', isLoggedIn, (req, res) => {
     db.run(
         `delete from borrowedbooks where usn=?`, [req.params.usn], (err) => {
             if (err) {
@@ -160,7 +160,7 @@ app.get('/student/delete/:usn', isLoggedIn,(req, res) => {
     )
 })
 
-app.get('/borrowedbooks/returned/:usn/:bookid', isLoggedIn,(req, res) => {
+app.get('/borrowedbooks/returned/:usn/:bookid', isLoggedIn, (req, res) => {
     db.run(
         `update borrowedbooks set status='Returned' where bookid=? and usn=?`, [req.params.bookid, req.params.usn], (err) => {
             if (err) {
@@ -178,10 +178,12 @@ app.get('/borrowedbooks/returned/:usn/:bookid', isLoggedIn,(req, res) => {
 })
 
 
-app.get('/studentlogin',(req, res) => {
-    res.render('studentlogin', { error: null });
+app.get('/studentlogin', (req, res) => {
+    res.render('studentlogin', {
+        error: null,
+        visit: null
+    });
 });
-
 
 app.post('/studentlogin', (req, res) => {
 
@@ -191,7 +193,12 @@ app.post('/studentlogin', (req, res) => {
         minute: '2-digit'
     });
     db.get(`select *  from students where usn=?`, [usn], (err, row) => {
-        if (!row) { res.render('studentlogin', { error: "student not found (invalid usn)" }) } else {
+        if (!row) {
+            return res.render('studentlogin', {
+                error: "student not found (invalid usn)",
+                visit: null
+            });
+        } else {
             db.get(
                 `SELECT *
          FROM LIBRARYVISITS
@@ -208,7 +215,15 @@ app.post('/studentlogin', (req, res) => {
                      (usn, entry_time, status)
                      VALUES (?, ?, 'IN')`,
                             [usn, now],
-                            () => res.redirect('/studentlogin')
+                            () => {
+                                res.render('studentlogin', {
+                                    error: null,
+                                    visit: {
+                                        status: 'IN',
+                                        entry_time: now
+                                    }
+                                });
+                            }
                         );
 
                     } else {
@@ -234,7 +249,17 @@ app.post('/studentlogin', (req, res) => {
                          duration=?
                      WHERE id=?`,
                             [now, duration, row.id],
-                            () => res.redirect('/studentlogin')
+                            () => {
+                                res.render('studentlogin', {
+                                    error: null,
+                                    visit: {
+                                        status: 'OUT',
+                                        entry_time: row.entry_time,
+                                        exit_time: now,
+                                        duration: duration
+                                    }
+                                });
+                            }
                         );
 
                     }
@@ -244,7 +269,7 @@ app.post('/studentlogin', (req, res) => {
     })
 });
 
-app.get('/books/issue/:bookid',isLoggedIn, (req, res) => {
+app.get('/books/issue/:bookid', isLoggedIn, (req, res) => {
     res.render("issueform", { error: null })
 })
 
@@ -294,7 +319,30 @@ app.post('/books/issue/:bookid', isLoggedIn, (req, res) => {
 
 })
 
-const PORT = process.env.PORT || 5000;
+
+app.get('/students/add', isLoggedIn, (req, res) => {
+    res.render('addstudent', { error: null });
+});
+
+app.post('/students/add', isLoggedIn, (req, res) => {
+    const { usn, name, branch } = req.body;
+
+    db.run(
+        `INSERT INTO students(usn,name,branch)
+         VALUES(?,?,?)`,
+        [usn, name, branch],
+        (err) => {
+            if (err) {
+                return res.render('addstudent', {
+                    error: 'Student already exists'
+                });
+            }
+
+            res.redirect('/students');
+        }
+    );
+});
+const PORT = process.env.PORT || 5002;
 
 app.listen(PORT, () => {
     console.log(`Running on port ${PORT}`);
