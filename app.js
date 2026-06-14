@@ -10,7 +10,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.static("public"))
 app.use(
     session({
-        secret: "librarysecret",
+        secret: process.env.SESSION_SECRET,
         resave: false,
         saveUninitialized: false
     })
