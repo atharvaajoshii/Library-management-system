@@ -9,7 +9,7 @@ A full-stack Library Management System built using **Node.js**, **Express.js**, 
 
 ---
 
-## 🌐 Live Demo
+##  Live Demo
 
 **Deployed Application:**  
 https://library-management-system-o9zd.onrender.com
@@ -19,42 +19,42 @@ https://github.com/atharvaajoshii/Library-management-system
 
 ---
 
-## ✨ Features
+##  Features
 
-### 🔐 Librarian Authentication
+###  Librarian Authentication
 - Secure login system
 - Session-based authentication
 - Protected routes
 - Logout functionality
 
-### 📖 Book Management
+###  Book Management
 - Add new books
 - Edit existing books
 - Delete books
 - View all books
 - Track available quantity
 
-### 🎓 Student Management
+###  Student Management
 - Add new students
 - View student records
 - Delete students
 - Manage student information using USN
 
-### 📕 Book Borrowing System
+###  Book Borrowing System
 - Issue books to students
 - Automatic return date generation
 - Prevent duplicate book issues
 - Mark books as returned
 - Automatic quantity updates
 
-### 🏫 Library Visit Tracking
+###  Library Visit Tracking
 - Student entry registration
 - Student exit registration
 - Automatic duration calculation
 - Real-time visitor tracking
 - Complete visit history
 
-### 📊 Dashboard Analytics
+###  Dashboard Analytics
 Displays:
 - Total Books
 - Total Borrowed Books
@@ -238,7 +238,7 @@ nodemon app.js
 
 ---
 
-## 🔑 Default Librarian Credentials
+##  Default Librarian Credentials
 
 ```text
 Email: atharva@gmail.com
@@ -323,7 +323,7 @@ Password: pass123
 
 ---
 
-## 🚀 Future Enhancements
+## Future Enhancements
 
 - Password hashing using bcrypt
 - Search and filter functionality
@@ -337,7 +337,7 @@ Password: pass123
 
 ---
 
-## 👨‍💻 Author
+##  Author
 
 ### Atharva Joshi
 
@@ -348,7 +348,7 @@ https://github.com/atharvaajoshii
 
 ---
 
-## ⭐ Support
+##  Support
 
 If you found this project useful, consider giving it a star ⭐ on GitHub.
 
