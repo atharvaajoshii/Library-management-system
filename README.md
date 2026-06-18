@@ -14,9 +14,6 @@ A full-stack Library Management System built using **Node.js**, **Express.js**, 
 **Deployed Application:**  
 https://library-management-system-o9zd.onrender.com
 
-**GitHub Repository:**  
-https://github.com/atharvaajoshii/Library-management-system
-
 ---
 
 ##  Features
